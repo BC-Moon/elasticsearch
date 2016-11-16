@@ -57,7 +57,7 @@ public class ClusterSearchShardsIT extends ESIntegTestCase {
         ClusterSearchShardsResponse response = client().admin().cluster().prepareSearchShards("test").execute().actionGet();
         assertThat(response.getGroups().length, equalTo(1));
         assertThat(response.getGroups()[0].getIndex(), equalTo("test"));
-        assertThat(response.getGroups()[0].getShardId(), equalTo(0));
+        assertThat(response.getGroups()[0].getShardId().getId(), equalTo(0));
         assertThat(response.getGroups()[0].getShards().length, equalTo(1));
         assertThat(response.getNodes().length, equalTo(1));
         assertThat(response.getGroups()[0].getShards()[0].currentNodeId(), equalTo(response.getNodes()[0].getId()));
@@ -65,7 +65,7 @@ public class ClusterSearchShardsIT extends ESIntegTestCase {
         response = client().admin().cluster().prepareSearchShards("test").setRouting("A").execute().actionGet();
         assertThat(response.getGroups().length, equalTo(1));
         assertThat(response.getGroups()[0].getIndex(), equalTo("test"));
-        assertThat(response.getGroups()[0].getShardId(), equalTo(0));
+        assertThat(response.getGroups()[0].getShardId().getId(), equalTo(0));
         assertThat(response.getGroups()[0].getShards().length, equalTo(1));
         assertThat(response.getNodes().length, equalTo(1));
         assertThat(response.getGroups()[0].getShards()[0].currentNodeId(), equalTo(response.getNodes()[0].getId()));
@@ -88,7 +88,7 @@ public class ClusterSearchShardsIT extends ESIntegTestCase {
 
         response = client().admin().cluster().prepareSearchShards("test").setPreference("_shards:2").execute().actionGet();
         assertThat(response.getGroups().length, equalTo(1));
-        assertThat(response.getGroups()[0].getShardId(), equalTo(2));
+        assertThat(response.getGroups()[0].getShardId().getId(), equalTo(2));
     }
 
     public void testMultipleIndicesAllocation() throws Exception {
