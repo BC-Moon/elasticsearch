@@ -125,7 +125,7 @@ abstract class AbstractSearchAsyncAction<FirstResult extends SearchPhaseResult> 
             } else {
                 AliasFilter filter = this.aliasFilter.get(shard.index().getUUID());
                 assert filter != null;
-                ShardSearchTransportRequest transportRequest = new ShardSearchTransportRequest(request, shard, shardsIts.size(),
+                ShardSearchTransportRequest transportRequest = new ShardSearchTransportRequest(request, shardIt.shardId(), shardsIts.size(),
                     filter, startTime());
                 sendExecuteFirstPhase(node, transportRequest , new ActionListener<FirstResult>() {
                         @Override
