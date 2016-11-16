@@ -33,7 +33,7 @@ public class ClusterSearchShardsResponse extends ActionResponse implements ToXCo
     private ClusterSearchShardsGroup[] groups;
     private DiscoveryNode[] nodes;
 
-    ClusterSearchShardsResponse() {
+    public ClusterSearchShardsResponse() {
 
     }
 
